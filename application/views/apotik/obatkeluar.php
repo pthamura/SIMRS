@@ -7,29 +7,30 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('beranda'); ?>"><i class="fa fa-home"></i> Beranda</a></li>
-            <li class="active">Obat Masuk</li>
+            <li class="active">Obat Keluar</li>
         </ol>
     </section>
     <!-- Main content -->
     <section class="content">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Obat Masuk ke Apotik</h3>
+                <h3 class="box-title">Obat Keluar dari Apotik</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <?php echo validation_errors(); ?>
-                <?php echo form_open('apotik/obatmasuk', array('class' => 'form-horizontal')); ?>
+                <?php echo form_open('apotik/obatkeluar', array('class' => 'form-horizontal')); ?>
                     <div class="multi-field-wrapper">
                         <div class="multi-fields">
                             <div class="multi-field">
                                 <div class="form-group">
-                                    <div class="col-xs-3">
-                                        <label for="kode_obat">Kode Obat <small class="text-danger">*</small></label>
-                                        <input type="text" name="kode_obat[]" class="form-control" placeholder="Masukan kode obat" required>
-                                    </div>
                                     <div class="col-xs-6">
-                                        <label for="nama_obat">Nama Obat <small class="text-danger">*</small></label>
-                                        <input type="text" name="nama_obat[]" class="form-control" placeholder="Masukan nama obat" required>
+                                        <label for="id_obat">Obat <small class="text-danger">*</small></label>
+                                        <select name="id_obat[]" class="form-control" required>
+                                            <option value="">== Pilih Obat ==</option>
+                                            <?php foreach ($getobat as $obat) { ?>
+                                            <option value="<?php echo $obat->id_apotik_obat;?>"><?php echo $obat->kode_obat;?> - <?php echo $obat->nama_obat;?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                     <div class="col-xs-3">
                                         <label for="qty">Kuantiti <small class="text-danger">*</small></label>

@@ -33,7 +33,7 @@
                                 <td class="text-center"><?php echo $no;?></td>
                                 <td><?php echo $obat->kode_obat;?></td>
                                 <td><?php echo $obat->nama_obat;?></td>
-                                <td class="text-right"><?php echo $obat->qty;?></td>
+                                <td class="text-right"><?php echo $obat->qty_masuk;?></td>
                             </tr>
                             <?php } ?>
                         </tbody>
