@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 01, 2016 at 08:26 
+-- Generation Time: Feb 02, 2016 at 08:24 
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -45,19 +45,19 @@ CREATE TABLE `db_apotik_obat` (
   `id_apotik_obat` int(11) NOT NULL,
   `kode_obat` varchar(45) DEFAULT NULL,
   `nama_obat` varchar(45) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL,
-  `tgl_update` timestamp NULL DEFAULT NULL,
-  `jenis_update` enum('masuk','keluar') DEFAULT NULL
+  `qty_masuk` int(11) DEFAULT NULL,
+  `tgl_masuk` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `db_apotik_obat`
 --
 
-INSERT INTO `db_apotik_obat` (`id_apotik_obat`, `kode_obat`, `nama_obat`, `qty`, `tgl_update`, `jenis_update`) VALUES
-(1, 'OB1', 'Puyer', 100, NULL, 'masuk'),
-(2, 'OB2', 'Antibiotik', 100, NULL, 'masuk'),
-(3, 'OB3', 'Parasetamol', 100, NULL, 'masuk');
+INSERT INTO `db_apotik_obat` (`id_apotik_obat`, `kode_obat`, `nama_obat`, `qty_masuk`, `tgl_masuk`, `id_user`) VALUES
+(1, 'OB1', 'Antibiotik', 92, '2016-02-02 06:44:11', 8),
+(2, 'OB2', 'Parasetamol', 74, '2016-02-02 06:44:11', 8),
+(3, 'OB3', 'Amoxilin', 86, '2016-02-02 06:44:11', 8);
 
 -- --------------------------------------------------------
 
@@ -69,23 +69,23 @@ CREATE TABLE `db_apotik_obat_keluar` (
   `id_apotik_obat_keluar` int(11) NOT NULL,
   `id_apotik_obat` int(11) NOT NULL,
   `qty_keluar` int(11) DEFAULT NULL,
-  `tgl_keluar` timestamp NULL DEFAULT NULL,
+  `tgl_keluar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `db_apotik_obat_masuk`
+-- Dumping data for table `db_apotik_obat_keluar`
 --
 
-CREATE TABLE `db_apotik_obat_masuk` (
-  `id_apotik_obat_masuk` int(11) NOT NULL,
-  `id_apotik_obat` int(11) NOT NULL,
-  `qty_masuk` int(11) NOT NULL,
-  `tgl_masuk` timestamp NULL DEFAULT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `db_apotik_obat_keluar` (`id_apotik_obat_keluar`, `id_apotik_obat`, `qty_keluar`, `tgl_keluar`, `id_user`) VALUES
+(1, 1, 1, '2016-02-01 09:11:18', 8),
+(2, 2, 1, '2016-02-01 09:11:18', 8),
+(3, 1, 1, '2016-02-02 06:43:30', 8),
+(4, 2, 2, '2016-02-02 06:43:30', 8),
+(5, 3, 3, '2016-02-02 06:43:30', 8),
+(6, 1, 3, '2016-02-02 06:44:11', 8),
+(7, 2, 2, '2016-02-02 06:44:11', 8),
+(8, 3, 1, '2016-02-02 06:44:11', 8);
 
 -- --------------------------------------------------------
 
@@ -662,7 +662,8 @@ ALTER TABLE `db_antrian`
 -- Indexes for table `db_apotik_obat`
 --
 ALTER TABLE `db_apotik_obat`
-  ADD PRIMARY KEY (`id_apotik_obat`);
+  ADD PRIMARY KEY (`id_apotik_obat`),
+  ADD KEY `fk_db_apotik_obat_db_user1_idx` (`id_user`);
 
 --
 -- Indexes for table `db_apotik_obat_keluar`
@@ -671,14 +672,6 @@ ALTER TABLE `db_apotik_obat_keluar`
   ADD PRIMARY KEY (`id_apotik_obat_keluar`),
   ADD KEY `fk_db_obat_keluar_db_user1_idx` (`id_user`),
   ADD KEY `fk_db_apotik_obat_keluar_db_apotik_obat1_idx` (`id_apotik_obat`);
-
---
--- Indexes for table `db_apotik_obat_masuk`
---
-ALTER TABLE `db_apotik_obat_masuk`
-  ADD PRIMARY KEY (`id_apotik_obat_masuk`),
-  ADD KEY `fk_db_obat_db_user1_idx` (`id_user`),
-  ADD KEY `fk_db_apotik_obat_masuk_db_apotik_obat1_idx` (`id_apotik_obat`);
 
 --
 -- Indexes for table `db_bangsal`
@@ -864,12 +857,7 @@ ALTER TABLE `db_apotik_obat`
 -- AUTO_INCREMENT for table `db_apotik_obat_keluar`
 --
 ALTER TABLE `db_apotik_obat_keluar`
-  MODIFY `id_apotik_obat_keluar` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `db_apotik_obat_masuk`
---
-ALTER TABLE `db_apotik_obat_masuk`
-  MODIFY `id_apotik_obat_masuk` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_apotik_obat_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `db_bangsal`
 --
@@ -992,18 +980,17 @@ ALTER TABLE `db_antrian`
   ADD CONSTRAINT `fk_db_antrian_db_poli1` FOREIGN KEY (`id_poli`) REFERENCES `db_poli` (`id_poli`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `db_apotik_obat`
+--
+ALTER TABLE `db_apotik_obat`
+  ADD CONSTRAINT `fk_db_apotik_obat_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `db_apotik_obat_keluar`
 --
 ALTER TABLE `db_apotik_obat_keluar`
   ADD CONSTRAINT `fk_db_apotik_obat_keluar_db_apotik_obat1` FOREIGN KEY (`id_apotik_obat`) REFERENCES `db_apotik_obat` (`id_apotik_obat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_db_obat_keluar_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `db_apotik_obat_masuk`
---
-ALTER TABLE `db_apotik_obat_masuk`
-  ADD CONSTRAINT `fk_db_apotik_obat_masuk_db_apotik_obat1` FOREIGN KEY (`id_apotik_obat`) REFERENCES `db_apotik_obat` (`id_apotik_obat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_db_obat_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `db_detail_pasien`
