@@ -41,13 +41,35 @@
     }elseif($menu=='bayar'){
         $aktif_bayar = 'active';
     }elseif($menu=='obatapotik'){
-        $aktif_do_apotik = 'active';
+        $aktif_apotik = 'active';
+        $aktif_daftarobat_apotik = 'active';
     }elseif($menu=='obatapotikmasuk'){
-        $aktif_oa_masuk = 'active';
+        $aktif_apotik = 'active';
+        $aktif_obatapotik_masuk = 'active';
     }elseif($menu=='obatapotikkeluar'){
-        $aktif_oa_keluar = 'active';
-    }elseif($menu=='obatgudang'){
-        $aktif_do_gudang = 'active';
+        $aktif_apotik = 'active';
+        $aktif_obatapotik_keluar = 'active';
+    }elseif($menu=='apotikgudang'){
+        $aktif_apotik = 'active';
+        $aktif_daftarobat_gudang = 'active';
+    }elseif($menu=='gudangobat'){
+        $aktif_gudangobat = 'active';
+        $aktif_gudangobat_list = 'active';
+    }elseif($menu=='gudangobatmasuk'){
+        $aktif_gudangobat = 'active';
+        $aktif_gudangobat_masuk = 'active';
+    }elseif($menu=='gudangobatkeluar'){
+        $aktif_gudangobat = 'active';
+        $aktif_gudangobat_keluar = 'active';
+    }elseif($menu=='gudangalkes'){
+        $aktif_alatkesehatan = 'active';
+        $aktif_alatkesehatan_list = 'active';
+    }elseif($menu=='gudangalkesmasuk'){
+        $aktif_alatkesehatan = 'active';
+        $aktif_alatkesehatan_masuk = 'active';
+    }elseif($menu=='gudangalkeskeluar'){
+        $aktif_alatkesehatan = 'active';
+        $aktif_alatkesehatan_keluar = 'active';
     }
 ?>
 <!-- Left side column. contains the logo and sidebar -->
@@ -103,20 +125,71 @@
                 // jika login sebagai apoteker
                 }elseif($this->session->userdata('id_level')==8){
             ?>
+            <li class="<?php echo $aktif_apotik;?> treeview">
+                <a href="#"><i class="fa fa-stethoscope"></i> Obat <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu"> 
+                    <li class="<?php echo $aktif_daftarobat_apotik;?>">
+                        <a href="<?php echo base_url('apotik/daftarobat');?>"><i class="fa fa-circle-o"></i> <span>Daftar Obat - Apotik</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_obatapotik_masuk;?>">
+                        <a href="<?php echo base_url('apotik/obatmasuk');?>"><i class="fa fa-circle-o"></i> <span>Obat Masuk</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_obatapotik_keluar;?>">
+                        <a href="<?php echo base_url('apotik/obatkeluar');?>"><i class="fa fa-circle-o"></i> <span>Obat Keluar</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_daftarobat_gudang;?>">
+                        <a href="<?php echo base_url('apotik/gudang');?>"><i class="fa fa-circle-o"></i> <span>Daftar Obat - Gudang</span></a>
+                    </li>
+                </ul>
+            </li>
+            <?php 
+                // jika login sebagai staff gudang
+                }elseif($this->session->userdata('id_level')==9){
+            ?>
             <li class="<?php echo $aktif_beranda;?>">
                 <a href="<?php echo base_url('beranda');?>"><i class="fa fa-home"></i> <span>Beranda</span></a>
             </li>
-            <li class="<?php echo $aktif_do_apotik;?>">
-                <a href="<?php echo base_url('apotik/obat');?>"><i class="fa fa-list"></i> <span>Daftar Obat Apotik</span></a>
+            <li class="<?php echo $aktif_gudangobat;?> treeview">
+                <a href="#"><i class="fa fa-stethoscope"></i> Obat <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu"> 
+                    <li class="<?php echo $aktif_gudangobat_list;?>">
+                        <a href="<?php echo base_url('gudang/daftarobat');?>"><i class="fa fa-circle-o"></i> <span>Daftar Obat</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_gudangobat_masuk;?>">
+                        <a href="<?php echo base_url('gudang/obatmasuk');?>"><i class="fa fa-circle-o"></i> <span>Obat Masuk</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_gudangobat_keluar;?>">
+                        <a href="<?php echo base_url('gudang/obatkeluar');?>"><i class="fa fa-circle-o"></i> <span>Obat Keluar</span></a>
+                    </li>
+                </ul>
             </li>
-            <li class="<?php echo $aktif_oa_masuk;?>">
-                <a href="<?php echo base_url('apotik/obatmasuk');?>"><i class="fa fa-sign-in"></i> <span>Obat Masuk</span></a>
+            <li class="<?php echo $aktif_alatkesehatan;?> treeview">
+                <a href="#"><i class="fa fa-wheelchair"></i> Alat Kesehatan <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="<?php echo $aktif_alatkesehatan_list;?>">
+                        <a href="<?php echo base_url('gudang/alatkesehatan');?>"><i class="fa fa-circle-o"></i> <span>Daftar Alat Kesehatan</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_alatkesehatan_masuk;?>">
+                        <a href="<?php echo base_url('gudang/alatkesehatanmasuk');?>"><i class="fa fa-circle-o"></i> <span>Alat Kesehatan Masuk</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_alatkesehatan_keluar;?>">
+                        <a href="<?php echo base_url('gudang/alatkesehatankeluar');?>"><i class="fa fa-circle-o"></i> <span>Alat Kesehatan Keluar</span></a>
+                    </li>
+                </ul>
             </li>
-            <li class="<?php echo $aktif_oa_keluar;?>">
-                <a href="<?php echo base_url('apotik/obatkeluar');?>"><i class="fa fa-sign-out"></i> <span>Obat Keluar</span></a>
-            </li>
-            <li class="<?php echo $aktif_do_gudang;?>">
-                <a href="<?php echo base_url('apotik/obatfarmasi');?>"><i class="fa fa-list"></i> <span>Daftar Obat Farmasi</span></a>
+            <li class="<?php echo $aktif_oksigen;?> treeview">
+                <a href="#"><i class="fa fa-heartbeat"></i> Oksigen <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="<?php echo $aktif_oksigen_list;?>">
+                        <a href="<?php echo base_url('gudang/oksigen');?>"><i class="fa fa-circle-o"></i> <span>Daftar Oksigen</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_oksigen_masuk;?>">
+                        <a href="<?php echo base_url('gudang/oksigenmasuk');?>"><i class="fa fa-circle-o"></i> <span>Oksigen Masuk</span></a>
+                    </li>
+                    <li class="<?php echo $aktif_oksigen_keluar;?>">
+                        <a href="<?php echo base_url('gudang/oksigenkeluar');?>"><i class="fa fa-circle-o"></i> <span>Oksigen Keluar</span></a>
+                    </li>
+                </ul>
             </li>
             <?php 
                 // jika login sebagai poli gigi

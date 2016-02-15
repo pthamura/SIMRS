@@ -5,9 +5,9 @@ class Apotik extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('apotik_model');
-		// $this->load->model('gudang_model');
+		$this->load->model('gudang_model');
 	}
-	public function obat(){
+	public function daftarobat(){
 		$data['menu'] = 'obatapotik';
 		$data['getobat'] = $this->apotik_model->getObatApotik();
         $this->load->view('header');
@@ -17,7 +17,6 @@ class Apotik extends CI_Controller {
 	}
 	public function obatmasuk(){
 		$data['menu'] = 'obatapotikmasuk';
-		$data['getobat'] = $this->apotik_model->getObatApotik();
 		$this->form_validation->set_rules('nama_obat[]', 'Nama Obat', 'required');
 		if ($this->form_validation->run() === FALSE){
 	        $this->load->view('header');
@@ -43,7 +42,7 @@ class Apotik extends CI_Controller {
 			    }
 			}
 			$this->apotik_model->setObatApotik($data);
-			redirect('apotik/obat');
+			redirect('apotik/daftarobat');
 		}
 	}
 	public function obatkeluar(){
@@ -88,15 +87,15 @@ class Apotik extends CI_Controller {
 		            }
 				}
 			}
-			redirect('apotik/obat');
+			redirect('apotik/daftarobat');
 		}
 	}
-	public function obatgudang(){
-		$data['menu'] = 'obatgudang';
-		$data['getobat'] = $this->gudang_model->getObatGudang();
+	public function gudang(){
+		$data['menu'] = 'apotikgudang';
+		$data['getobat'] = $this->gudang_model->getGudangObat();
         $this->load->view('header');
         $this->load->view('menu',$data);
-        $this->load->view('apotik/obatgudang', $data);
+        $this->load->view('apotik/gudangobat', $data);
         $this->load->view('footer');
 	}
 }

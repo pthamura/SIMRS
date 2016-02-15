@@ -24,7 +24,7 @@
                                 <th width="5%" class="text-center">No</th>
                                 <th width="5%" class="text-center">Kode</th>
                                 <th class="text-center">Nama</th>
-                                <th width="5%" class="text-center">Qty</th>
+                                <th width="5%" class="text-center">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -26,7 +26,7 @@
                                 $norm = $norm->norm+1;
                             ?>
                             <label for="norm">No. Rekam Medis <small class="text-danger">*</small></label>
-                            <input type="text" id="norm" name="norm" class="form-control" value="<?php echo sprintf("%06d",$norm);?>" placeholder="Masukan nomor rekam medis" required/>
+                            <input type="text" id="norm" name="norm" class="form-control" value="<?php echo sprintf("%06d",$norm);?>" placeholder="Masukan nomor rekam medis" readonly/>
                         </div>
                         <div class="col-xs-2">
                             <label for="norm" class="col-xs-12">&nbsp;</label><br/>
@@ -38,7 +38,8 @@
                                 <option value="">== Pilih Cara Bayar ==</option>
                                 <option value="Tunai">Tunai</option>
                                 <option value="BPJS">BPJS</option>
-                                <option value="Asuransi">Asuransi</option>
+                                <option value="Kartu Papua Sehat">Kartu Papua Sehat</option>
+                                <option value="Jaminan Kesehatan Nasional">Jaminan Kesehatan Nasional</option>
                             </select>    
                         </div>
                         <!-- modal NORM -->
@@ -86,7 +87,7 @@
                                 $no_daftar = $nodaftar->no_daftar+1;
                             ?>
                             <label for="no_daftar">No. Pendaftaran <small class="text-danger">*</small></label>
-                            <input type="text" name="no_daftar" class="form-control" value="<?php echo sprintf("%06d",$no_daftar)?>" placeholder="Masukan nomor pendaftaran" required/>
+                            <input type="text" name="no_daftar" class="form-control" value="<?php echo sprintf("%06d",$no_daftar)?>" placeholder="Masukan nomor pendaftaran" readonly/>
                         </div>
                         <div class="col-xs-6">
                             <label for="id_poli">Poliklinik <small class="text-danger">*</small></label>

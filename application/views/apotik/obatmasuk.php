@@ -32,7 +32,7 @@
                                         <input type="text" name="nama_obat[]" class="form-control" placeholder="Masukan nama obat" required>
                                     </div>
                                     <div class="col-xs-3">
-                                        <label for="qty">Kuantiti <small class="text-danger">*</small></label>
+                                        <label for="qty">Jumlah <small class="text-danger">*</small></label>
                                         <input type="text" name="qty[]" class="form-control" placeholder="Masukan jumlah obat" required>
                                     </div>
                                 </div>

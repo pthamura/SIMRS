@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2016 at 08:24 
+-- Generation Time: Feb 10, 2016 at 09:48 
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -118,7 +118,7 @@ INSERT INTO `db_bangsal` (`id_bangsal`, `kode`, `nama_bangsal`) VALUES
 CREATE TABLE `db_detail_pasien` (
   `id_detail_pasien` int(11) NOT NULL,
   `id_pasien` int(11) NOT NULL,
-  `pembayaran` enum('Tunai','BPJS','Asuransi') DEFAULT NULL,
+  `pembayaran` varchar(45) DEFAULT NULL,
   `layanan` enum('Rawat Jalan','Rawat Inap') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -128,6 +128,138 @@ CREATE TABLE `db_detail_pasien` (
 
 INSERT INTO `db_detail_pasien` (`id_detail_pasien`, `id_pasien`, `pembayaran`, `layanan`) VALUES
 (1, 1, 'Tunai', 'Rawat Jalan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_alkes`
+--
+
+CREATE TABLE `db_gudang_alkes` (
+  `id_gudang_alkes` int(11) NOT NULL,
+  `kode_alkes` varchar(45) DEFAULT NULL,
+  `nama_alkes` varchar(45) DEFAULT NULL,
+  `qty_masuk` int(11) DEFAULT NULL,
+  `tgl_masuk` timestamp NULL DEFAULT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `db_gudang_alkes`
+--
+
+INSERT INTO `db_gudang_alkes` (`id_gudang_alkes`, `kode_alkes`, `nama_alkes`, `qty_masuk`, `tgl_masuk`, `id_user`) VALUES
+(1, 'AK1', 'Jarum Suntik', 90, NULL, 9),
+(2, 'AK2', 'Infus', 95, NULL, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_alkes_keluar`
+--
+
+CREATE TABLE `db_gudang_alkes_keluar` (
+  `id_gudang_alkes_keluar` int(11) NOT NULL,
+  `id_gudang_alkes` int(11) NOT NULL,
+  `qty_keluar` int(11) DEFAULT NULL,
+  `tgl_keluar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `db_gudang_alkes_keluar`
+--
+
+INSERT INTO `db_gudang_alkes_keluar` (`id_gudang_alkes_keluar`, `id_gudang_alkes`, `qty_keluar`, `tgl_keluar`, `id_user`) VALUES
+(1, 1, 10, '2016-02-03 06:56:18', 9),
+(2, 2, 5, '2016-02-03 06:56:18', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_obat`
+--
+
+CREATE TABLE `db_gudang_obat` (
+  `id_gudang_obat` int(11) NOT NULL,
+  `kode_obat` varchar(45) DEFAULT NULL,
+  `nama_obat` varchar(45) DEFAULT NULL,
+  `qty_masuk` int(11) DEFAULT NULL,
+  `tgl_masuk` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `db_gudang_obat`
+--
+
+INSERT INTO `db_gudang_obat` (`id_gudang_obat`, `kode_obat`, `nama_obat`, `qty_masuk`, `tgl_masuk`, `id_user`) VALUES
+(1, 'OB1', 'Antibiotik', 1000, '2016-02-03 04:03:18', 9),
+(2, 'OB2', 'Parasetamol', 1000, '2016-02-03 04:03:18', 9),
+(3, 'OB3', 'Amoxilin', 1000, '2016-02-03 04:03:18', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_obat_keluar`
+--
+
+CREATE TABLE `db_gudang_obat_keluar` (
+  `id_gudang_obat_keluar` int(11) NOT NULL,
+  `id_gudang_obat` int(11) NOT NULL,
+  `qty_keluar` int(11) DEFAULT NULL,
+  `tgl_keluar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_oksigen`
+--
+
+CREATE TABLE `db_gudang_oksigen` (
+  `id_gudang_oksigen` int(11) NOT NULL,
+  `kode` varchar(45) DEFAULT NULL,
+  `nama` varchar(45) DEFAULT NULL,
+  `total_qty` varchar(45) DEFAULT NULL,
+  `tgl_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `db_gudang_oksigen`
+--
+
+INSERT INTO `db_gudang_oksigen` (`id_gudang_oksigen`, `kode`, `nama`, `total_qty`, `tgl_update`) VALUES
+(1, 'O2', 'Oksigen', '0', '2016-02-03 07:18:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_oksigen_keluar`
+--
+
+CREATE TABLE `db_gudang_oksigen_keluar` (
+  `id_gudang_oksigen_keluar` int(11) NOT NULL,
+  `id_gudang_oksigen` int(11) NOT NULL,
+  `qty_keluar` int(11) DEFAULT NULL,
+  `tgl_keluar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_gudang_oksigen_masuk`
+--
+
+CREATE TABLE `db_gudang_oksigen_masuk` (
+  `id_gudang_oksigen_masuk` int(11) NOT NULL,
+  `id_gudang_oksigen` int(11) NOT NULL,
+  `qty_masuk` int(11) DEFAULT NULL,
+  `tgl_masuk` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -365,7 +497,8 @@ INSERT INTO `db_level` (`id_level`, `kode_level`, `nama_level`) VALUES
 (5, 'staff_front', 'Staff Front Office'),
 (6, 'staff_lab', 'Staff Laboratorium'),
 (7, 'staff_bayar', 'Staff Loket Pembayaran'),
-(8, 'apoteker', 'Staff Apotik');
+(8, 'apoteker', 'Staff Apotik'),
+(9, 'staff_gudang', 'Staff Gudang');
 
 -- --------------------------------------------------------
 
@@ -644,7 +777,8 @@ INSERT INTO `db_user` (`id_user`, `username`, `password`, `fullname`, `gender`, 
 (5, 'drsuhenni', '827ccb0eea8a706c4c34a16891f84e7b', 'dr. Suhenni,SpM', 'L', NULL, NULL, 'active', 4, NULL),
 (6, 'drwidiyanto', '827ccb0eea8a706c4c34a16891f84e7b', 'dr. Widiyanto Pratikto', 'L', '081344084441', 'A', 'active', 4, NULL),
 (7, 'userloket', '827ccb0eea8a706c4c34a16891f84e7b', 'User Loket Pembayaran', 'P', NULL, NULL, 'active', 7, NULL),
-(8, 'apoteker', '827ccb0eea8a706c4c34a16891f84e7b', 'Staff Apotik', 'P', NULL, NULL, 'active', 8, NULL);
+(8, 'apoteker', '827ccb0eea8a706c4c34a16891f84e7b', 'Staff Apotik', 'P', NULL, NULL, 'active', 8, NULL),
+(9, 'staffgudang', '827ccb0eea8a706c4c34a16891f84e7b', 'Staff Gudang', 'L', NULL, NULL, 'active', 9, NULL);
 
 --
 -- Indexes for dumped tables
@@ -685,6 +819,58 @@ ALTER TABLE `db_bangsal`
 ALTER TABLE `db_detail_pasien`
   ADD PRIMARY KEY (`id_detail_pasien`),
   ADD KEY `fk_db_detail_pasien_db_pasien1_idx` (`id_pasien`);
+
+--
+-- Indexes for table `db_gudang_alkes`
+--
+ALTER TABLE `db_gudang_alkes`
+  ADD PRIMARY KEY (`id_gudang_alkes`),
+  ADD KEY `fk_db_gudang_alkes_db_user1_idx` (`id_user`);
+
+--
+-- Indexes for table `db_gudang_alkes_keluar`
+--
+ALTER TABLE `db_gudang_alkes_keluar`
+  ADD PRIMARY KEY (`id_gudang_alkes_keluar`),
+  ADD KEY `fk_db_gudang_alkes_keluar_db_user1_idx` (`id_user`),
+  ADD KEY `fk_db_gudang_alkes_keluar_db_gudang_alkes1_idx` (`id_gudang_alkes`);
+
+--
+-- Indexes for table `db_gudang_obat`
+--
+ALTER TABLE `db_gudang_obat`
+  ADD PRIMARY KEY (`id_gudang_obat`),
+  ADD KEY `fk_db_gudang_obat_db_user1_idx` (`id_user`);
+
+--
+-- Indexes for table `db_gudang_obat_keluar`
+--
+ALTER TABLE `db_gudang_obat_keluar`
+  ADD PRIMARY KEY (`id_gudang_obat_keluar`),
+  ADD KEY `fk_db_gudang_obat_keluar_db_user1_idx` (`id_user`),
+  ADD KEY `fk_db_gudang_obat_keluar_db_gudang_obat1_idx` (`id_gudang_obat`);
+
+--
+-- Indexes for table `db_gudang_oksigen`
+--
+ALTER TABLE `db_gudang_oksigen`
+  ADD PRIMARY KEY (`id_gudang_oksigen`);
+
+--
+-- Indexes for table `db_gudang_oksigen_keluar`
+--
+ALTER TABLE `db_gudang_oksigen_keluar`
+  ADD PRIMARY KEY (`id_gudang_oksigen_keluar`),
+  ADD KEY `fk_db_oksigen_keluar_db_user1_idx` (`id_user`),
+  ADD KEY `fk_db_gudang_oksigen_keluar_db_gudang_oksigen1_idx` (`id_gudang_oksigen`);
+
+--
+-- Indexes for table `db_gudang_oksigen_masuk`
+--
+ALTER TABLE `db_gudang_oksigen_masuk`
+  ADD PRIMARY KEY (`id_gudang_oksigen_masuk`),
+  ADD KEY `fk_db_oksigen_db_user1_idx` (`id_user`),
+  ADD KEY `fk_db_gudang_oksigen_masuk_db_gudang_oksigen1_idx` (`id_gudang_oksigen`);
 
 --
 -- Indexes for table `db_hasil_lab`
@@ -869,6 +1055,36 @@ ALTER TABLE `db_bangsal`
 ALTER TABLE `db_detail_pasien`
   MODIFY `id_detail_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `db_gudang_alkes`
+--
+ALTER TABLE `db_gudang_alkes`
+  MODIFY `id_gudang_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `db_gudang_obat`
+--
+ALTER TABLE `db_gudang_obat`
+  MODIFY `id_gudang_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `db_gudang_obat_keluar`
+--
+ALTER TABLE `db_gudang_obat_keluar`
+  MODIFY `id_gudang_obat_keluar` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `db_gudang_oksigen`
+--
+ALTER TABLE `db_gudang_oksigen`
+  MODIFY `id_gudang_oksigen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `db_gudang_oksigen_keluar`
+--
+ALTER TABLE `db_gudang_oksigen_keluar`
+  MODIFY `id_gudang_oksigen_keluar` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `db_gudang_oksigen_masuk`
+--
+ALTER TABLE `db_gudang_oksigen_masuk`
+  MODIFY `id_gudang_oksigen_masuk` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `db_hasil_lab`
 --
 ALTER TABLE `db_hasil_lab`
@@ -912,7 +1128,7 @@ ALTER TABLE `db_lab`
 -- AUTO_INCREMENT for table `db_level`
 --
 ALTER TABLE `db_level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `db_pasien`
 --
@@ -967,7 +1183,7 @@ ALTER TABLE `db_total_tagihan`
 -- AUTO_INCREMENT for table `db_user`
 --
 ALTER TABLE `db_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
@@ -997,6 +1213,46 @@ ALTER TABLE `db_apotik_obat_keluar`
 --
 ALTER TABLE `db_detail_pasien`
   ADD CONSTRAINT `fk_db_detail_pasien_db_pasien1` FOREIGN KEY (`id_pasien`) REFERENCES `db_pasien` (`id_pasien`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_alkes`
+--
+ALTER TABLE `db_gudang_alkes`
+  ADD CONSTRAINT `fk_db_gudang_alkes_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_alkes_keluar`
+--
+ALTER TABLE `db_gudang_alkes_keluar`
+  ADD CONSTRAINT `fk_db_gudang_alkes_keluar_db_gudang_alkes1` FOREIGN KEY (`id_gudang_alkes`) REFERENCES `db_gudang_alkes` (`id_gudang_alkes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_db_gudang_alkes_keluar_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_obat`
+--
+ALTER TABLE `db_gudang_obat`
+  ADD CONSTRAINT `fk_db_gudang_obat_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_obat_keluar`
+--
+ALTER TABLE `db_gudang_obat_keluar`
+  ADD CONSTRAINT `fk_db_gudang_obat_keluar_db_gudang_obat1` FOREIGN KEY (`id_gudang_obat`) REFERENCES `db_gudang_obat` (`id_gudang_obat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_db_gudang_obat_keluar_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_oksigen_keluar`
+--
+ALTER TABLE `db_gudang_oksigen_keluar`
+  ADD CONSTRAINT `fk_db_gudang_oksigen_keluar_db_gudang_oksigen1` FOREIGN KEY (`id_gudang_oksigen`) REFERENCES `db_gudang_oksigen` (`id_gudang_oksigen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_db_oksigen_keluar_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `db_gudang_oksigen_masuk`
+--
+ALTER TABLE `db_gudang_oksigen_masuk`
+  ADD CONSTRAINT `fk_db_gudang_oksigen_masuk_db_gudang_oksigen1` FOREIGN KEY (`id_gudang_oksigen`) REFERENCES `db_gudang_oksigen` (`id_gudang_oksigen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_db_oksigen_db_user1` FOREIGN KEY (`id_user`) REFERENCES `db_user` (`id_user`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `db_hasil_lab`

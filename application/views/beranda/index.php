@@ -215,7 +215,7 @@
         <div class="row">
             <div class="col-lg-4 col-xs-12">
                 <!-- small box -->
-                <a href="<?php echo base_url('apotik/obat');?>">
+                <a href="<?php echo base_url('apotik/daftarobat');?>">
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3>Daftar Obat</h3>
@@ -234,7 +234,7 @@
                     <div class="small-box bg-maroon-active">
                         <div class="inner">
                             <h3>Obat Masuk</h3>
-                            <p>Daftar Obat Masuk</p>
+                            <p>Form Obat Masuk</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-sign-in"></i>
@@ -249,18 +249,18 @@
                     <div class="small-box bg-red">
                         <div class="inner">
                             <h3>Obat Keluar</h3>
-                            <p>Daftar Obat Keluar</p>
+                            <p>Form Obat Keluar</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-sign-out"></i>
                         </div>
-                        <span class="small-box-footer">OBAT DIKELUARKAN DARI APOTIK <i class="fa fa-arrow-circle-right"></i></span>
+                        <span class="small-box-footer">OBAT KELUAR DARI APOTIK <i class="fa fa-arrow-circle-right"></i></span>
                     </div>
                 </a>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
                 <!-- small box -->
-                <a href="<?php echo base_url('apotik/obatgudang');?>">
+                <a href="<?php echo base_url('apotik/gudang');?>">
                     <div class="small-box bg-light-blue">
                         <div class="inner">
                             <h3>Obat Gudang</h3>
@@ -270,6 +270,146 @@
                             <i class="fa fa-list"></i>
                         </div>
                         <span class="small-box-footer">DAFTAR OBAT DI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+        </div><!-- /.row -->
+        <!-- jika login sebagai staff gudang -->
+        <?php }elseif($this->session->userdata('id_level') == 9){ ?>
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/daftarobat');?>">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>Daftar Obat</h3>
+                            <p>Daftar Obat di Gudang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <span class="small-box-footer">DAFTAR OBAT DI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/obatmasuk');?>">
+                    <div class="small-box bg-maroon-active">
+                        <div class="inner">
+                            <h3>Obat Masuk</h3>
+                            <p>Form Obat Masuk</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-in"></i>
+                        </div>
+                        <span class="small-box-footer">OBAT MASUK KE GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/obatkeluar');?>">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>Obat Keluar</h3>
+                            <p>Form Obat Keluar</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-out"></i>
+                        </div>
+                        <span class="small-box-footer">OBAT KELUAR DARI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/alatkesehatan');?>">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>Alat Kesehatan</h3>
+                            <p>Daftar Alat Kesehatan di Gudang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <span class="small-box-footer">DAFTAR ALAT KESEHATAN DI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/alatkesehatanmasuk');?>">
+                    <div class="small-box bg-maroon-active">
+                        <div class="inner">
+                            <h3>Alat Kesehatan Masuk</h3>
+                            <p>Form Alat Kesehatan Masuk</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-in"></i>
+                        </div>
+                        <span class="small-box-footer">ALAT KESEHATAN MASUK KE GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/alatkesehatankeluar');?>">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>Alat Kesehatan Keluar</h3>
+                            <p>Form Alat Kesehatan Keluar</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-out"></i>
+                        </div>
+                        <span class="small-box-footer">ALAT KESEHATAN KELUAR DARI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/oksigen');?>">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>Oksigen</h3>
+                            <p>Daftar Oksigen di Gudang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <span class="small-box-footer">DAFTAR OKSIGEN DI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/alatkesehatanmasuk');?>">
+                    <div class="small-box bg-maroon-active">
+                        <div class="inner">
+                            <h3>Oksigen Masuk</h3>
+                            <p>Form Oksigen Masuk</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-in"></i>
+                        </div>
+                        <span class="small-box-footer">OKSIGEN KE GUDANG <i class="fa fa-arrow-circle-right"></i></span>
+                    </div>
+                </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+                <!-- small box -->
+                <a href="<?php echo base_url('gudang/alatkesehatankeluar');?>">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>Oksigen Keluar</h3>
+                            <p>Form Oksigen Keluar</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sign-out"></i>
+                        </div>
+                        <span class="small-box-footer">OKSIGEN KELUAR DARI GUDANG <i class="fa fa-arrow-circle-right"></i></span>
                     </div>
                 </a>
             </div><!-- ./col -->
